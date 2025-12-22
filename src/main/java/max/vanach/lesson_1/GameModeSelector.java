@@ -45,7 +45,6 @@ public class GameModeSelector {
             case 2:
                 // Computer vs Number
                 GameReverse gameReverse = new GameReverse(level);
-                System.out.print("Enter hint (1 - Too low, 2 - Too high, 3 - Correct): ");
                 gameReverse.play(scan);
                 //tutaj będzie zapis wyniku komputera, jeśli zaimplementujesz taką funkcjonalność
                  System.out.println("Computer guessed your number in " + gameReverse.getTries() + " tries.");

@@ -1,5 +1,3 @@
-//zmienione nazwy plików na PascalCase
-
 package max.vanach.lesson_1;
 
 import java.util.Scanner;
@@ -17,24 +15,59 @@ public class Lesson2Mine {
         // Wczytaj lub stwórz gracza przez PlayerManager
         Player player = PlayerManager.loadPlayer(name);
        
-        if(player.getBestScore(1) == 999 && player.getBestScore(2) == 999 && player.getBestScore(3) == 999) {
+        // Sprawdź czy to nowy gracz (wszystkie wyniki domyślne)
+        boolean isNewPlayer = true;
+        for (int level = 1; level <= 3; level++)
+        {
+            if (player.getSingleBestScore(level) != 999 || player.getVersusBestScore(level) != 999)
+            {
+                isNewPlayer = false;
+                break;
+            }
+        }
+        if (player.getVersusWins() > 0 || player.getVersusLosses() > 0)
+        {
+            isNewPlayer = false;
+        }
+        
+        if (isNewPlayer)
+        {
             System.out.println("This is your first game, good luck!");
         }
-        else {
-            System.out.print("Your best scores - ");
-            if(player.getBestScore(1) != 999) System.out.print("Easy: " + player.getBestScore(1) + " ");
-            if(player.getBestScore(2) != 999) System.out.print("Medium: " + player.getBestScore(2) + " ");
-            if(player.getBestScore(3) != 999) System.out.print("Hard: " + player.getBestScore(3));
+        else
+        {
+            // Single scores
+            System.out.print("Single best scores - ");
+            for (int level = 1; level <= 3; level++)
+            {
+                if (player.getSingleBestScore(level) != 999)
+                {
+                    String levelName = LevelSelector.getLevelName(level);
+                    System.out.print(levelName + ": " + player.getSingleBestScore(level) + " ");
+                }
+            }
             System.out.println();
-        }   
+            
+            // Versus scores
+            System.out.print("Versus best scores - ");
+            for (int level = 1; level <= 3; level++)
+            {
+                if (player.getVersusBestScore(level) != 999)
+                {
+                    String levelName = LevelSelector.getLevelName(level);
+                    System.out.print(levelName + ": " + player.getVersusBestScore(level) + " ");
+                }
+            }
+            System.out.println();
+            
+            // Versus wins/losses
+            System.out.println("Versus record: " + player.getVersusWins() + " wins / " + player.getVersusLosses() + " losses");
+        }
 
         // Gra
         int gameMode = GameModeSelector.selectGameMode(scan);
         int level = LevelSelector.selectLevel(scan);
         GameModeSelector.playSelectedMode(gameMode, level, player, scan);
-      
-        
-        
 
         // Zapisz gracza przez PlayerManager
         PlayerManager.savePlayer(player);
@@ -42,3 +75,5 @@ public class Lesson2Mine {
         scan.close();
     }
 }
+
+

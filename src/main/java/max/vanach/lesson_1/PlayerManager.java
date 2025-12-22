@@ -13,12 +13,12 @@ public class PlayerManager {
         String filename = "./" + nickname + ".txt";
         File file = new File(filename);
 
-        if (file.exists())  // gracz istnieje
+        if (file.exists())
         {
             System.out.println("Found existing player file!");
             loadPlayerData(player, file);
         }
-        else  // nowy gracz
+        else
         {
             System.out.println("Welcome new player, " + nickname + "!");
         }
@@ -39,25 +39,38 @@ public class PlayerManager {
                 filereader.nextLine();
             }
             
-            // Linia 2: Easy
-            if (filereader.hasNextLine()) 
+            // Linie 2-4: Single best scores (Easy, Medium, Hard)
+            for (int level = 1; level <= 3; level++)
             {
-                int scoreEasy = Integer.parseInt(filereader.nextLine());
-                player.setScore(1, scoreEasy);
+                if (filereader.hasNextLine()) 
+                {
+                    int score = Integer.parseInt(filereader.nextLine());
+                    player.setSingleScore(level, score);
+                }
             }
-
-            // Linia 3: Medium
-            if (filereader.hasNextLine()) 
+            
+            // Linie 5-7: Versus best scores (Easy, Medium, Hard)
+            for (int level = 1; level <= 3; level++)
             {
-                int scoreMedium = Integer.parseInt(filereader.nextLine());
-                player.setScore(2, scoreMedium);
+                if (filereader.hasNextLine()) 
+                {
+                    int score = Integer.parseInt(filereader.nextLine());
+                    player.setVersusScore(level, score);
+                }
             }
-
-            // Linia 4: Hard
+            
+            // Linia 8: Versus wins
             if (filereader.hasNextLine()) 
             {
-                int scoreHard = Integer.parseInt(filereader.nextLine());
-                player.setScore(3, scoreHard);
+                int wins = Integer.parseInt(filereader.nextLine());
+                player.setVersusWins(wins);
+            }
+            
+            // Linia 9: Versus losses
+            if (filereader.hasNextLine()) 
+            {
+                int losses = Integer.parseInt(filereader.nextLine());
+                player.setVersusLosses(losses);
             }
             
             System.out.println("Welcome back, " + player.getNickname() + "!");
@@ -83,10 +96,26 @@ public class PlayerManager {
         try
         {
             PrintWriter filewriter = new PrintWriter(file);
-            filewriter.println(player.getNickname());       // Linia 1: nick
-            filewriter.println(player.getBestScore(1));     // Linia 2: wynik Easy
-            filewriter.println(player.getBestScore(2));     // Linia 3: wynik Medium
-            filewriter.println(player.getBestScore(3));     // Linia 4: wynik Hard
+            
+            // Linia 1: nick
+            filewriter.println(player.getNickname());
+            
+            // Linie 2-4: Single best scores
+            for (int level = 1; level <= 3; level++)
+            {
+                filewriter.println(player.getSingleBestScore(level));
+            }
+            
+            // Linie 5-7: Versus best scores
+            for (int level = 1; level <= 3; level++)
+            {
+                filewriter.println(player.getVersusBestScore(level));
+            }
+            
+            // Linia 8-9: Versus wins/losses
+            filewriter.println(player.getVersusWins());
+            filewriter.println(player.getVersusLosses());
+            
             filewriter.close();
             System.out.println("Data saved for player: " + player.getNickname());
         }

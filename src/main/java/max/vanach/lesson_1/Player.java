@@ -1,113 +1,78 @@
 package max.vanach.lesson_1;
 
-// Tylko dane gracza, BEZ logiki plików
 public class Player 
 {
     private String nickname;
-    private int bestScoreEasy;
-    private int bestScoreMedium;
-    private int bestScoreHard;
-
+    
+    // [0]=Easy, [1]=Medium, [2]=Hard
+    private int[] singleBestScores;
+    private int[] versusBestScores;
+    
+    private int versusWins;
+    private int versusLosses;
+    
     public Player(String nickname)
     {
         this.nickname = nickname;
-        this.bestScoreEasy = 999;
-        this.bestScoreMedium = 999;
-        this.bestScoreHard = 999;
+        this.singleBestScores = new int[]{999, 999, 999};
+        this.versusBestScores = new int[]{999, 999, 999};
+        this.versusWins = 0;
+        this.versusLosses = 0;
     }
     
-    public String getNickname()
+    // level: 1, 2, 3 -> index: 0, 1, 2
+    public int getSingleBestScore(int level)
     {
-        return this.nickname;
+        return this.singleBestScores[level - 1];
     }
-
-    public int getBestScore(int level)
+    
+    public int getVersusBestScore(int level)
     {
-        switch (level) {
-            case 1:
-                return this.bestScoreEasy;
-            case 2:
-                return this.bestScoreMedium;
-            case 3:
-                return this.bestScoreHard;
-            default:
-                return 999;
+        return this.versusBestScores[level - 1];
+    }
+    
+    public void setSingleBestScore(int level, int tries)
+    {
+        int index = level - 1;
+        if (tries < this.singleBestScores[index])
+        {
+            printNewRecord(this.singleBestScores[index], tries);
+            this.singleBestScores[index] = tries;
         }
     }
-
-    public void setBestScore(int level, int tries)
+    
+    public void setVersusBestScore(int level, int tries)
     {
-        switch (level) {
-            case 1:
-                setBestScoreEasy(tries);
-                break;
-            case 2:
-                setBestScoreMedium(tries);
-                break;
-            case 3:
-                setBestScoreHard(tries);
-                break;
+        int index = level - 1;
+        if (tries < this.versusBestScores[index])
+        {
+            printNewRecord(this.versusBestScores[index], tries);
+            this.versusBestScores[index] = tries;
         }
     }
-
-    public void setBestScoreEasy(int tries)
+    
+    private void printNewRecord(int oldScore, int newScore)
     {
-        if (tries < this.bestScoreEasy) {
-            if(this.bestScoreEasy == 999)
-            {
-                System.out.println("New record! " + tries + " tries. Congratulations!");
-            }
-            else
-            {
-                System.out.println("New record! Previous: " + this.bestScoreEasy + ", New: " + tries);
-            }
-            this.bestScoreEasy = tries;
+        if (oldScore == 999)
+        {
+            System.out.println("New record! " + newScore + " tries. Congratulations!");
+        }
+        else
+        {
+            System.out.println("New record! Previous: " + oldScore + ", New: " + newScore);
         }
     }
-
-    public void setBestScoreMedium(int tries)
-    {
-        if (tries < this.bestScoreMedium) {
-            if(this.bestScoreMedium == 999)
-            {
-                System.out.println("New record! " + tries + " tries. Congratulations!");
-            }
-            else
-            {
-                System.out.println("New record! Previous: " + this.bestScoreMedium + ", New: " + tries);
-            }
-            this.bestScoreMedium = tries;
-        }
-    }
-
-    public void setBestScoreHard(int tries)
-    {
-        if (tries < this.bestScoreHard) {
-            if(this.bestScoreHard == 999)
-            {
-                System.out.println("New record! " + tries + " tries. Congratulations!");
-            }
-            else
-            {
-                System.out.println("New record! Previous: " + this.bestScoreHard + ", New: " + tries);
-            }
-            this.bestScoreHard = tries;
-        }
-    }
-
-    public void setScore(int level, int score)
-{
-    switch (level) {
-        case 1:
-            this.bestScoreEasy = score;
-            break;
-        case 2:
-            this.bestScoreMedium = score;
-            break;
-        case 3:
-            this.bestScoreHard = score;
-            break;
-    }
-}
-   
+    
+    public void addVersusWin() { this.versusWins++; }
+    public void addVersusLoss() { this.versusLosses++; }
+    
+    public int getVersusWins() { return this.versusWins; }
+    public int getVersusLosses() { return this.versusLosses; }
+    public String getNickname() { return this.nickname; }
+    
+    // Do odczytu z pliku
+    public void setVersusWins(int wins) { this.versusWins = wins; }
+    public void setVersusLosses(int losses) { this.versusLosses = losses; }
+    public void setSingleScore(int level, int score) { this.singleBestScores[level - 1] = score; }
+    public void setVersusScore(int level, int score) { this.versusBestScores[level - 1] = score; }
 }

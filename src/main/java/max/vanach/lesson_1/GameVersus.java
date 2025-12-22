@@ -45,6 +45,7 @@ public class GameVersus {
 
                     if (computerWon) {
                         System.out.println("Computer wins!");
+                        break;
                     }
                 }
                
@@ -71,6 +72,7 @@ public class GameVersus {
 
                     if (playerWon) {
                         System.out.println("Player wins!");
+                        break;
                     }
 
                 }
