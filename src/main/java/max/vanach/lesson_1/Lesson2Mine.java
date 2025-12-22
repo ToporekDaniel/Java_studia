@@ -29,40 +29,10 @@ public class Lesson2Mine {
         }   
 
         // Gra
-        int gameMode = GameModeSelector.selectGameMode();
-        int level = LevelSelector.selectLevel();
-        boolean hasWon = false;
-        switch (gameMode) {
-            case 1:
-                // Player vs Number
-                Game game = new Game(level);
-                while (!hasWon) {
-                    System.out.print("Enter your guess: ");
-                    int guess = Integer.parseInt(scan.nextLine());
-                    hasWon = game.makeGuess(guess);
-                }
-                player.setBestScore(level, game.getTries());
-                System.out.println("Your current best score: " + player.getBestScore(level));
-                break;
-            case 2:
-                // Computer vs Number
-                GameReverse gameReverse = new GameReverse(level);
-                System.out.print("Enter hint (1 - Too low, 2 - Too high, 3 - Correct): ");
-                 while (!hasWon) {
-                    System.out.print("My guess is: ");
-                    int guess = gameReverse.guessNumber(level);
-                    int hint = Integer.parseInt(scan.nextLine());
-                    hasWon = gameReverse.playerHint(hint);
-                }
-                //tutaj będzie zapis wyniku komputera, jeśli zaimplementujesz taką funkcjonalność
-                 System.out.println("Computer guessed your number in " + gameReverse.getTries() + " tries.");
-                break;
-            case 3:
-                // Player vs Computer
-                break;
-            default:
-                break;
-        }
+        int gameMode = GameModeSelector.selectGameMode(scan);
+        int level = LevelSelector.selectLevel(scan);
+        GameModeSelector.playSelectedMode(gameMode, level, player, scan);
+      
         
         
 

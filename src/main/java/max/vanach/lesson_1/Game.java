@@ -1,6 +1,7 @@
 package max.vanach.lesson_1;
 
 import java.util.Random;
+import java.util.Scanner;
 
 
 public class Game {
@@ -49,6 +50,17 @@ public class Game {
             return true;
         }
     }
+
+    public void play(Scanner scan) {
+    boolean hasWon = false;
+    while (!hasWon) {
+        System.out.print("Enter your guess: ");
+        int guess = Integer.parseInt(scan.nextLine());
+        hasWon = makeGuess(guess);
+    }
+}
+
+
 
     public int getTries()
         {

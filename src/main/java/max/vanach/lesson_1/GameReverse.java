@@ -1,5 +1,6 @@
 package max.vanach.lesson_1;
 
+import java.util.Scanner;
 
 public class GameReverse {
     private int tries;
@@ -10,7 +11,6 @@ public class GameReverse {
 
     public GameReverse(int level)
     {
-        
         switch(level)
         {
             case 1:
@@ -40,12 +40,11 @@ public class GameReverse {
         this.tries = 0;
     }
 
-    public int guessNumber(int level) 
+    public int guessNumber() 
     {
         this.tries++;
         guess = (min + max) / 2;
-        System.out.print("My guess is: ");
-        System.out.println(guess);       
+        System.out.println("My guess is: " + guess );   
         return guess;
     }
 
@@ -68,11 +67,21 @@ public class GameReverse {
                 System.out.println("Invalid hint. Please enter 1 (Too low), 2 (Too high), or 3 (Correct).");
                 return false;
         }
-
-
-
-    
     }
+
+    public void play(Scanner scan) {
+    boolean hasWon = false;
+    System.out.println("Enter hint (1 - Too low, 2 - Too high, 3 - Correct): ");
+     while (!hasWon) {
+                    System.out.print("My guess is: ");
+                    int guess = guessNumber();
+                    int hint = Integer.parseInt(scan.nextLine());
+                    hasWon = playerHint(hint);
+                }
+}
+
+
+
 
     public int getTries()
         {
