@@ -1,0 +1,12 @@
+# Skompilowane pliki
+target/
+*.class
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# System
+.DS_Store
+Thumbs.db
