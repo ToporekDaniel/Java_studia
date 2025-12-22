@@ -52,6 +52,9 @@ public class GameModeSelector {
                 break;
             case 3:
                 // Player vs Computer
+                GameVersus gameVersus = new GameVersus(level);
+                gameVersus.play(scan);
+                 System.out.println("Game over! Thanks for playing.");
                 break;
             default:
                 break;
