@@ -30,34 +30,35 @@ public class GameModeSelector {
         return gameMode;
     }
 
-    public static void playSelectedMode(int gameMode, int level, Player player , Scanner scan)
+    public static void playSelectedMode(int gameMode, int level, Player player, Player computer, Scanner scan)
     {
-        
-        
         switch (gameMode) {
             case 1:
-                // Player vs Number
+                // Player vs Number (single)
                 Game game = new Game(level);
                 game.play(scan);
-                player.setBestScore(level, game.getTries());
-                System.out.println("Your current best score: " + player.getBestScore(level));
+                player.setSingleBestScore(level, game.getTries());
+                System.out.println("Your current best score: " + player.getSingleBestScore(level));
                 break;
+                
             case 2:
                 // Computer vs Number
                 GameReverse gameReverse = new GameReverse(level);
                 gameReverse.play(scan);
-                //tutaj będzie zapis wyniku komputera, jeśli zaimplementujesz taką funkcjonalność
-                 System.out.println("Computer guessed your number in " + gameReverse.getTries() + " tries.");
+                computer.setSingleBestScore(level, gameReverse.getTries());
+                System.out.println("Computer guessed your number in " + gameReverse.getTries() + " tries.");
+                System.out.println("Computer's best score: " + computer.getSingleBestScore(level));
                 break;
+                
             case 3:
-                // Player vs Computer
-                GameVersus gameVersus = new GameVersus(level);
+                // Player vs Computer (versus)
+                GameVersus gameVersus = new GameVersus(level, player, computer);
                 gameVersus.play(scan);
-                 System.out.println("Game over! Thanks for playing.");
+                System.out.println("Game over! Thanks for playing.");
                 break;
+                
             default:
                 break;
         }
     }
-
 }

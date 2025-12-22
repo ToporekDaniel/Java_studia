@@ -7,12 +7,16 @@ public class GameVersus {
     private Game playerGame;
     private GameReverse computerGame;
     private int tries;
+    private Player player;
+    private Player computer;
   
 
-    public GameVersus(int level) {
+    public GameVersus(int level, Player player, Player computer) {
         playerGame = new Game(level);
         computerGame = new GameReverse(level);
         this.tries = 0;
+        this.player = player;
+        this.computer = computer;
     }
 
     public void play(Scanner scan) {
@@ -48,6 +52,7 @@ public class GameVersus {
                         break;
                     }
                 }
+                break;
                
             case 1:
                 System.out.println("Computer goes first!");
@@ -74,12 +79,22 @@ public class GameVersus {
                         System.out.println("Player wins!");
                         break;
                     }
-
                 }
+                break;  
 
             default:
                 break;
         }
+
+        if (playerWon) {
+            this.player.addVersusWin();
+            this.computer.addVersusLoss();
+        } else if (computerWon) {
+            this.computer.addVersusWin();
+            this.player.addVersusLoss();
+        }
+
+
     }
 
     public int getTries()

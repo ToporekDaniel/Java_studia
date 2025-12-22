@@ -14,6 +14,9 @@ public class Lesson2Mine {
         
         // Wczytaj lub stwórz gracza przez PlayerManager
         Player player = PlayerManager.loadPlayer(name);
+        
+        // Wczytaj lub stwórz komputer
+        Player computer = PlayerManager.loadPlayer("_COMPUTER");
        
         // Sprawdź czy to nowy gracz (wszystkie wyniki domyślne)
         boolean isNewPlayer = true;
@@ -67,13 +70,12 @@ public class Lesson2Mine {
         // Gra
         int gameMode = GameModeSelector.selectGameMode(scan);
         int level = LevelSelector.selectLevel(scan);
-        GameModeSelector.playSelectedMode(gameMode, level, player, scan);
+        GameModeSelector.playSelectedMode(gameMode, level, player, computer, scan);
 
-        // Zapisz gracza przez PlayerManager
+        // Zapisz gracza i komputer przez PlayerManager
         PlayerManager.savePlayer(player);
+        PlayerManager.savePlayer(computer);
         
         scan.close();
     }
 }
-
-
