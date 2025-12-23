@@ -3,17 +3,15 @@ package max.vanach.lesson_1;
 import java.util.Scanner;
 
 public class GameModeSelector {
-    public static int selectGameMode(Scanner scan) 
-    {
-       
+    public static int selectGameMode(Scanner scan) {
+
         System.out.println("Select game mode:");
         System.out.println("1 - Player vs Number");
         System.out.println("2 - Computer vs Number");
         System.out.println("3 - Player vs Computer");
 
         int gameMode = Integer.parseInt(scan.nextLine());
-        switch(gameMode)
-        {
+        switch (gameMode) {
             case 1:
                 System.out.println("You selected Player vs Number mode.");
                 break;
@@ -30,8 +28,7 @@ public class GameModeSelector {
         return gameMode;
     }
 
-    public static void playSelectedMode(int gameMode, int level, Player player, Player computer, Scanner scan)
-    {
+    public static void playSelectedMode(int gameMode, int level, Player player, Player computer, Scanner scan) {
         switch (gameMode) {
             case 1:
                 // Player vs Number (single)
@@ -40,7 +37,7 @@ public class GameModeSelector {
                 player.setSingleBestScore(level, game.getTries());
                 System.out.println("Your current best score: " + player.getSingleBestScore(level));
                 break;
-                
+
             case 2:
                 // Computer vs Number
                 GameReverse gameReverse = new GameReverse(level);
@@ -49,14 +46,19 @@ public class GameModeSelector {
                 System.out.println("Computer guessed your number in " + gameReverse.getTries() + " tries.");
                 System.out.println("Computer's best score: " + computer.getSingleBestScore(level));
                 break;
-                
+
             case 3:
                 // Player vs Computer (versus)
                 GameVersus gameVersus = new GameVersus(level, player, computer);
-                gameVersus.play(scan);
+                boolean playerWon = gameVersus.play(scan);
+
+                if (playerWon) {
+                    player.setVersusBestScore(level, gameVersus.getTries()); // <- zapisujesz tries z gry
+                    System.out.println("Your current versus best score: " + player.getVersusBestScore(level));
+                }
                 System.out.println("Game over! Thanks for playing.");
                 break;
-                
+
             default:
                 break;
         }

@@ -7,12 +7,9 @@ public class GameReverse {
     private int guess;
     private int min = 1;
     private int max;
-  
 
-    public GameReverse(int level)
-    {
-        switch(level)
-        {
+    public GameReverse(int level) {
+        switch (level) {
             case 1:
                 max = 100;
                 break;
@@ -25,8 +22,7 @@ public class GameReverse {
         }
 
         System.out.print("A new game has started! Think of a number between 1 and 100");
-        switch(level)
-        {
+        switch (level) {
             case 1:
                 System.out.println(".");
                 break;
@@ -40,29 +36,27 @@ public class GameReverse {
         this.tries = 0;
     }
 
-    public int guessNumber() 
-    {
+    public int guessNumber() {
         this.tries++;
         guess = (min + max) / 2;
-        System.out.println("My guess is: " + guess );   
+        System.out.println("My guess is: " + guess);
         return guess;
     }
 
-    public boolean playerHint(int hint) 
-    {
+    public boolean playerHint(int hint) {
         switch (hint) {
             case 1:
                 min = guess + 1;
                 return false;
-                
+
             case 2:
                 max = guess - 1;
                 return false;
-                
+
             case 3:
                 System.out.println("Huray! I've guessed your number " + guess + " in " + tries + " tries.");
                 return true;
-                
+
             default:
                 System.out.println("Invalid hint. Please enter 1 (Too low), 2 (Too high), or 3 (Correct).");
                 return false;
@@ -70,21 +64,17 @@ public class GameReverse {
     }
 
     public void play(Scanner scan) {
-    boolean hasWon = false;
-    System.out.println("Enter hint (1 - Too low, 2 - Too high, 3 - Correct): ");
-     while (!hasWon) {
-                    int guess = guessNumber();
-                    int hint = Integer.parseInt(scan.nextLine());
-                    hasWon = playerHint(hint);
-                }
-}
-
-
-
-
-    public int getTries()
-        {
-            return this.tries;
+        boolean hasWon = false;
+        System.out.println("Enter hint (1 - Too low, 2 - Too high, 3 - Correct): ");
+        while (!hasWon) {
+            int guess = guessNumber();
+            int hint = Integer.parseInt(scan.nextLine());
+            hasWon = playerHint(hint);
         }
+    }
+
+    public int getTries() {
+        return this.tries;
+    }
 
 }

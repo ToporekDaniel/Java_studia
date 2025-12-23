@@ -30,6 +30,9 @@ public class Lesson2Mine {
             isNewPlayer = false;
         }
 
+        // TODO albo całość przeniść PlayerManager i tam zrobić metodę
+        // isNewPlayer(Player player) na podstawie czy plik istnieje
+
         if (isNewPlayer) {
             System.out.println("This is your first game, good luck!");
         } else {

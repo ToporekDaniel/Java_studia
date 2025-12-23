@@ -9,7 +9,6 @@ public class GameVersus {
     private int tries;
     private Player player;
     private Player computer;
-  
 
     public GameVersus(int level, Player player, Player computer) {
         playerGame = new Game(level);
@@ -19,17 +18,16 @@ public class GameVersus {
         this.computer = computer;
     }
 
-    public void play(Scanner scan) {
+    public boolean play(Scanner scan) {
         Random random = new Random();
         boolean playerWon = false;
         boolean computerWon = false;
         int coinToss = random.nextInt(0, 2); // 0 for player first, 1 for computer first
-        
+
         switch (coinToss) {
             case 0:
                 System.out.println("Player goes first!");
-                while (!playerWon && !computerWon)
-                {
+                while (!playerWon && !computerWon) {
                     tries++;
                     // Player's turn
                     System.out.print("Player, enter your guess: ");
@@ -53,11 +51,10 @@ public class GameVersus {
                     }
                 }
                 break;
-               
+
             case 1:
                 System.out.println("Computer goes first!");
-                while (!playerWon && !computerWon)
-                {
+                while (!playerWon && !computerWon) {
                     tries++;
                     // Computer's turn
                     int computerGuess = computerGame.guessNumber();
@@ -80,7 +77,7 @@ public class GameVersus {
                         break;
                     }
                 }
-                break;  
+                break;
 
             default:
                 break;
@@ -93,13 +90,12 @@ public class GameVersus {
             this.computer.addVersusWin();
             this.player.addVersusLoss();
         }
-
+        return playerWon;
 
     }
 
-    public int getTries()
-        {
-            return this.tries;
-        }
+    public int getTries() {
+        return this.tries;
+    }
 
 }
