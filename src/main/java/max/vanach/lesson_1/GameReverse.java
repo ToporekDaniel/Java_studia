@@ -67,7 +67,7 @@ public class GameReverse {
         boolean hasWon = false;
         System.out.println("Enter hint (1 - Too low, 2 - Too high, 3 - Correct): ");
         while (!hasWon) {
-            int guess = guessNumber();
+            guessNumber();
             int hint = Integer.parseInt(scan.nextLine());
             hasWon = playerHint(hint);
         }

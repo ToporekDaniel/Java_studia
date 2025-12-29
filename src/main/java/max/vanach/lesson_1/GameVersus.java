@@ -40,7 +40,7 @@ public class GameVersus {
                     }
 
                     // Computer's turn
-                    int computerGuess = computerGame.guessNumber();
+                    computerGame.guessNumber();
                     System.out.print("Enter hint for computer (1 - Too low, 2 - Too high, 3 - Correct): ");
                     int hint = Integer.parseInt(scan.nextLine());
                     computerWon = computerGame.playerHint(hint);
@@ -57,7 +57,7 @@ public class GameVersus {
                 while (!playerWon && !computerWon) {
                     tries++;
                     // Computer's turn
-                    int computerGuess = computerGame.guessNumber();
+                    computerGame.guessNumber();
                     System.out.print("Enter hint for computer (1 - Too low, 2 - Too high, 3 - Correct): ");
                     int hint = Integer.parseInt(scan.nextLine());
                     computerWon = computerGame.playerHint(hint);
