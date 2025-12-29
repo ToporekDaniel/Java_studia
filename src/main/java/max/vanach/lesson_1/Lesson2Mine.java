@@ -36,10 +36,11 @@ public class Lesson2Mine {
         if (isNewPlayer) {
             System.out.println("This is your first game, good luck!");
         } else {
-            player.printScores();
+            System.out.println("Welcome back, " + name + "!");
         }
 
         while (true) {
+            player.printScores();
             // Gra
             int gameMode = GameModeSelector.selectGameMode(scan);
             if (gameMode == 0) {

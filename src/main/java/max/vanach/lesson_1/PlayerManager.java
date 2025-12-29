@@ -60,8 +60,6 @@ public class PlayerManager {
                 player.setVersusLosses(losses);
             }
 
-            System.out.println("Welcome back, " + player.getNickname() + "!");
-
             filereader.close();
         } catch (FileNotFoundException e) {
             System.err.println("Error reading file: " + e.getMessage());
