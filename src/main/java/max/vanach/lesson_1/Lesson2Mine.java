@@ -36,40 +36,22 @@ public class Lesson2Mine {
         if (isNewPlayer) {
             System.out.println("This is your first game, good luck!");
         } else {
-            // Single scores
-            System.out.print("Single best scores - ");
-            for (int level = 1; level <= 3; level++) {
-                if (player.getSingleBestScore(level) != 999) {
-                    String levelName = LevelSelector.getLevelName(level);
-                    System.out.print(levelName + ": " + player.getSingleBestScore(level) + " ");
-                }
-            }
-            System.out.println();
-
-            // Versus scores
-            System.out.print("Versus best scores - ");
-            for (int level = 1; level <= 3; level++) {
-                if (player.getVersusBestScore(level) != 999) {
-                    String levelName = LevelSelector.getLevelName(level);
-                    System.out.print(levelName + ": " + player.getVersusBestScore(level) + " ");
-                }
-            }
-            System.out.println();
-
-            // Versus wins/losses
-            System.out.println(
-                    "Versus record: " + player.getVersusWins() + " wins / " + player.getVersusLosses() + " losses");
+            player.printScores();
         }
 
-        // Gra
-        int gameMode = GameModeSelector.selectGameMode(scan);
-        int level = LevelSelector.selectLevel(scan);
-        GameModeSelector.playSelectedMode(gameMode, level, player, computer, scan);
+        while (true) {
+            // Gra
+            int gameMode = GameModeSelector.selectGameMode(scan);
+            if (gameMode == 0) {
+                break;
+            }
+            int level = LevelSelector.selectLevel(scan);
+            GameModeSelector.playSelectedMode(gameMode, level, player, computer, scan);
 
-        // Zapisz gracza i komputer przez PlayerManager
-        PlayerManager.savePlayer(player);
-        PlayerManager.savePlayer(computer);
-
+            // Zapisz gracza i komputer przez PlayerManager
+            PlayerManager.savePlayer(player);
+            PlayerManager.savePlayer(computer);
+        }
         scan.close();
     }
 }

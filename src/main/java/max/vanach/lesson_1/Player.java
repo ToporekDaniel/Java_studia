@@ -53,14 +53,38 @@ public class Player
     
     private void printNewRecord(int oldScore, int newScore)
     {
-        if (oldScore == 999)
-        {
+        if (oldScore == 999) {
             System.out.println("New record! " + newScore + " tries. Congratulations!");
-        }
-        else
-        {
+        } else {
             System.out.println("New record! Previous: " + oldScore + ", New: " + newScore);
         }
+    }
+    
+    public void printScores() {
+
+        // Single scores
+        System.out.print("Single best scores - ");
+        for (int level = 1; level <= 3; level++) {
+            if (getSingleBestScore(level) != 999) {
+                String levelName = LevelSelector.getLevelName(level);
+                System.out.print(levelName + ": " + getSingleBestScore(level) + " ");
+            }
+        }
+        System.out.println();
+
+        // Versus scores
+        System.out.print("Versus best scores - ");
+        for (int level = 1; level <= 3; level++) {
+            if (getVersusBestScore(level) != 999) {
+                String levelName = LevelSelector.getLevelName(level);
+                System.out.print(levelName + ": " + getVersusBestScore(level) + " ");
+            }
+        }
+        System.out.println();
+
+        // Versus wins/losses
+        System.out.println(
+                "Versus record: " + getVersusWins() + " wins / " + getVersusLosses() + " losses");
     }
     
     public void addVersusWin() { this.versusWins++; }
