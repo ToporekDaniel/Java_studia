@@ -9,6 +9,7 @@ public class GameModeSelector {
         System.out.println("1 - Player vs Number");
         System.out.println("2 - Computer vs Number");
         System.out.println("3 - Player vs Computer");
+        System.out.println("4 - Multiplayer");
         System.out.println("0 - Exit");
 
         int gameMode = Integer.parseInt(scan.nextLine());
@@ -21,6 +22,9 @@ public class GameModeSelector {
                 break;
             case 3:
                 System.out.println("You selected Player vs Computer mode.");
+                break;
+            case 4:
+                System.out.println("You selected Multiplayer mode.");
                 break;
             case 0:
                 System.out.println("Exiting the game. Goodbye!");

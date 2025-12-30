@@ -60,6 +60,18 @@ public class PlayerManager {
                 player.setVersusLosses(losses);
             }
 
+            // Linia 10: Multiplayer wins
+            if (filereader.hasNextLine()) {
+                int multiWins = Integer.parseInt(filereader.nextLine());
+                player.setMultiWins(multiWins);
+            }
+
+            // Linia 11: Multiplayer losses
+            if (filereader.hasNextLine()) {
+                int multiLosses = Integer.parseInt(filereader.nextLine());
+                player.setMultiLosses(multiLosses);
+            }
+
             filereader.close();
         } catch (FileNotFoundException e) {
             System.err.println("Error reading file: " + e.getMessage());
@@ -92,6 +104,9 @@ public class PlayerManager {
             // Linia 8-9: Versus wins/losses
             filewriter.println(player.getVersusWins());
             filewriter.println(player.getVersusLosses());
+            // Linia 10-11: Multiplayer wins/losses
+            filewriter.println(player.getMultiWins());
+            filewriter.println(player.getMultiLosses());
 
             filewriter.close();
             System.out.println("Data saved for player: " + player.getNickname());
