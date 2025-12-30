@@ -44,6 +44,7 @@ public class GameModeSelector {
                 game.play(scan);
                 player.setSingleBestScore(level, game.getTries());
                 System.out.println("Your current best score: " + player.getSingleBestScore(level));
+                PlayerManager.savePlayer(player);
                 break;
 
             case 2:
@@ -53,6 +54,7 @@ public class GameModeSelector {
                 computer.setSingleBestScore(level, gameReverse.getTries());
                 System.out.println("Computer guessed your number in " + gameReverse.getTries() + " tries.");
                 System.out.println("Computer's best score: " + computer.getSingleBestScore(level));
+                PlayerManager.savePlayer(computer);
                 break;
 
             case 3:
@@ -65,6 +67,8 @@ public class GameModeSelector {
                     System.out.println("Your current versus best score: " + player.getVersusBestScore(level));
                 }
                 System.out.println("Game over! Thanks for playing.");
+                PlayerManager.savePlayer(player);
+                PlayerManager.savePlayer(computer);
                 break;
 
             case 4:

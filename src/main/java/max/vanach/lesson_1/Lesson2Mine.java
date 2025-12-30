@@ -49,9 +49,7 @@ public class Lesson2Mine {
             int level = LevelSelector.selectLevel(scan);
             GameModeSelector.playSelectedMode(gameMode, level, player, computer, scan);
 
-            // Zapisz gracza i komputer przez PlayerManager
-            PlayerManager.savePlayer(player);
-            PlayerManager.savePlayer(computer);
+            // Zapis przeniesiony do GameModeSelector po każdej grze
         }
         scan.close();
     }
