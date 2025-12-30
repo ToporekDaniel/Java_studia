@@ -67,7 +67,10 @@ public class GameModeSelector {
                 System.out.println("Game over! Thanks for playing.");
                 break;
 
-            default:
+            case 4:
+                // Multiplayer
+                Multiplayer multiplayer = new Multiplayer(level);
+                multiplayer.multiPlay(scan);
                 break;
         }
     }
