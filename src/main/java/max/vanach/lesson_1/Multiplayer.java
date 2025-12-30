@@ -68,7 +68,7 @@ public class Multiplayer {
         }
     }
 
-    public void multiPlay(Scanner scan, ArrayList<Player> players) {
+    public void play(Scanner scan, ArrayList<Player> players) {
         int currentPlayer = 0;
 
         boolean hasWon = false;

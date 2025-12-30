@@ -3,7 +3,7 @@ package max.vanach.lesson_1;
 import java.util.Scanner;
 import java.io.*;
 
-public class Lesson2Mine {
+public class NumbersGame {
 
     public static void main(String[] args) throws FileNotFoundException {
 

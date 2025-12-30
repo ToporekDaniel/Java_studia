@@ -33,7 +33,7 @@ public class GameModeSelector {
                 System.out.println("Exiting the game. Goodbye!");
                 return 0;
             default:
-                System.out.println("Invalid level. Please choose 1, 2, or 3.");
+                System.out.println("Invalid mode. Please choose 1, 2, 3, or 4.");
                 return selectGameMode(scan);
         }
         return gameMode;
@@ -79,7 +79,7 @@ public class GameModeSelector {
                 players = Multiplayer.setupPlayers(scan);
                 while (true) {
                     Multiplayer multiplayer = new Multiplayer(level, scan);
-                    multiplayer.multiPlay(scan, players);
+                    multiplayer.play(scan, players);
                     System.out.print("Do you want to play another round? (1 - yes, 2 - no): ");
                     int choice = Integer.parseInt(scan.nextLine());
                     if (choice != 1) {
