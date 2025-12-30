@@ -13,7 +13,6 @@ public class PlayerManager {
         File file = new File(filename);
 
         if (file.exists()) {
-            System.out.println("Found existing player file!"); // niepotrzebne mam welcomeback
             loadPlayerData(player, file);
         } else {
             System.out.println("Welcome new player, " + nickname + "!");
@@ -109,7 +108,9 @@ public class PlayerManager {
             fileWriter.println(player.getMultiLosses());
 
             fileWriter.close();
-            System.out.println("Data saved for player: " + player.getNickname());
+            // niech zostanie do debugowania
+            // System.out.println("Data saved for player: " + player.getNickname());
+
         } catch (FileNotFoundException e) {
             System.err.println("Error saving file: " + e.getMessage());
         }

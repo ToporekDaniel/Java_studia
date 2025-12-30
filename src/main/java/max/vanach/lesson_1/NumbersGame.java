@@ -50,6 +50,11 @@ public class NumbersGame {
             GameModeSelector.playSelectedMode(gameMode, level, player, computer, scan);
 
             // Zapis przeniesiony do GameModeSelector po każdej grze
+
+            player = PlayerManager.loadPlayer(player.getNickname());
+            // Odświeżenie danych gracza po zapisaniu
+            // aby uniknąć problemów z nadpisaniem pliku
+
         }
         scan.close();
     }
