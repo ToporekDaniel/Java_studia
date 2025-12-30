@@ -3,12 +3,17 @@ package max.vanach.lesson_1;
 import java.util.Scanner;
 
 public class LevelSelector {
-     public static int selectLevel(Scanner scan) 
-    {
-        System.out.print("Select level (1-Easy, 2-Medium, 3-Hard): ");
+    public static int selectLevel(Scanner scan, int gameMode) {
+        System.out.print("Select level (1-Easy, 2-Medium, 3-Hard");
+
+        // Opcja 4 tylko dla versus (3) i multi (4)
+        if (gameMode == 4) {
+            System.out.print(", 4-Advanced");
+        }
+        System.out.println("): ");
+
         int level = Integer.parseInt(scan.nextLine());
-        switch(level)
-        {
+        switch (level) {
             case 1:
                 System.out.println("You selected Easy mode.");
                 break;
@@ -18,21 +23,34 @@ public class LevelSelector {
             case 3:
                 System.out.println("You selected Hard mode.");
                 break;
+            case 4:
+                if (gameMode == 4) {
+                    System.out.println("You selected Advanced mode.");
+                    // Tu będzie pobieranie zakresu
+                } else {
+                    System.out.println("Invalid level.");
+                    return selectLevel(scan, gameMode);
+                }
+                break;
             default:
-                System.out.println("Invalid level. Please choose 1, 2, or 3.");
-                return selectLevel(scan);
+                System.out.println("Invalid level.");
+                return selectLevel(scan, gameMode);
         }
         return level;
     }
 
-    public static String getLevelName(int level)
-    {
-        switch (level)
-        {
-            case 1: return "Easy";
-            case 2: return "Medium";
-            case 3: return "Hard";
-            default: return "Unknown";
+    public static String getLevelName(int level) {
+        switch (level) {
+            case 1:
+                return "Easy";
+            case 2:
+                return "Medium";
+            case 3:
+                return "Hard";
+            case 4:
+                return "Advanced";
+            default:
+                return "Unknown";
         }
     }
 }

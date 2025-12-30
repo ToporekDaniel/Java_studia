@@ -9,25 +9,39 @@ public class Multiplayer {
     private int secretNumber;
     private int tries;
     private Random random;
-    private int level;
+    private int min;
+    private int max;
 
-    public Multiplayer(int level) {
-        this.random = new Random();
-        this.level = level;
+    public Multiplayer(int level, Scanner scan) { // dodaj Scanner
+        random = new Random();
 
-        System.out.print("A new game has started! Guess the number between 1 and 100");
-        switch (this.level) {
+        switch (level) {
             case 1:
+                this.min = 1;
+                this.max = 100;
                 this.secretNumber = random.nextInt(1, 101);
-                System.out.println(".");
+                System.out.println("A new game has started! Guess the number between 1 and 100.");
                 break;
             case 2:
+                this.min = 1;
+                this.max = 10000;
                 this.secretNumber = random.nextInt(1, 10001);
-                System.out.println("00.");
+                System.out.println("A new game has started! Guess the number between 1 and 10000.");
                 break;
             case 3:
+                this.min = 1;
+                this.max = 1000000;
                 this.secretNumber = random.nextInt(1, 1000001);
-                System.out.println("0000.");
+                System.out.println("A new game has started! Guess the number between 1 and 1000000.");
+                break;
+            case 4:
+                System.out.print("Enter the minimum number: ");
+                this.min = Integer.parseInt(scan.nextLine()); // this.min, nie int min
+                System.out.print("Enter the maximum number: ");
+                this.max = Integer.parseInt(scan.nextLine()); // this.max, nie int max
+                this.secretNumber = random.nextInt(this.min, this.max + 1);
+                System.out.println(
+                        "A new game has started! Guess the number between " + this.min + " and " + this.max + ".");
                 break;
         }
         this.tries = 0;
@@ -35,7 +49,13 @@ public class Multiplayer {
 
     public boolean makeGuess(int guess) {
         this.tries++;
-        if (guess < secretNumber) {
+        if (guess < min) {
+            System.out.println("Your guess is below the minimum limit of " + min + ". Try again.");
+            return false;
+        } else if (guess > max) {
+            System.out.println("Your guess is above the maximum limit of " + max + ". Try again.");
+            return false;
+        } else if (guess < secretNumber) {
             System.out.println("Too low! Try again.");
             return false;
         } else if (guess > secretNumber) {
@@ -48,11 +68,10 @@ public class Multiplayer {
         }
     }
 
-    public void multiPlay(Scanner scan) {
-        boolean hasWon = false;
+    public void multiPlay(Scanner scan, ArrayList<Player> players) {
         int currentPlayer = 0;
-        ArrayList<Player> players = setupPlayers(scan);
 
+        boolean hasWon = false;
         while (!hasWon) {
             Player player = players.get(currentPlayer);
             System.out.print(player.getNickname() + " your guess is: ");

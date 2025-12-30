@@ -46,7 +46,7 @@ public class Lesson2Mine {
             if (gameMode == 0) {
                 break;
             }
-            int level = LevelSelector.selectLevel(scan);
+            int level = LevelSelector.selectLevel(scan, gameMode);
             GameModeSelector.playSelectedMode(gameMode, level, player, computer, scan);
 
             // Zapis przeniesiony do GameModeSelector po każdej grze

@@ -1,8 +1,11 @@
 package max.vanach.lesson_1;
 
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class GameModeSelector {
+    private static ArrayList<Player> players;
+
     public static int selectGameMode(Scanner scan) {
 
         System.out.println("Select game mode:");
@@ -73,8 +76,18 @@ public class GameModeSelector {
 
             case 4:
                 // Multiplayer
-                Multiplayer multiplayer = new Multiplayer(level);
-                multiplayer.multiPlay(scan);
+                players = Multiplayer.setupPlayers(scan);
+                while (true) {
+                    Multiplayer multiplayer = new Multiplayer(level, scan);
+                    multiplayer.multiPlay(scan, players);
+                    System.out.print("Do you want to play another round? (1 - yes, 2 - no): ");
+                    int choice = Integer.parseInt(scan.nextLine());
+                    if (choice != 1) {
+                        break;
+                    }
+                    System.out.println("Starting a new round! Winner pick the next numbers.");
+                    level = LevelSelector.selectLevel(scan, 4);
+                }
                 break;
         }
     }
