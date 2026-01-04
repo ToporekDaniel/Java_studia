@@ -71,6 +71,18 @@ public class PlayerManager {
                 player.setMultiLosses(multiLosses);
             }
 
+            // Linia 12: isLeader
+            if (fileReader.hasNextLine()) {
+                boolean isLeader = Boolean.parseBoolean(fileReader.nextLine());
+                player.setIsLeader(isLeader);
+            }
+
+            // Linia 13: isChampion
+            if (fileReader.hasNextLine()) {
+                boolean isChampion = Boolean.parseBoolean(fileReader.nextLine());
+                player.setIsChampion(isChampion);
+            }
+
             fileReader.close();
         } catch (FileNotFoundException e) {
             System.err.println("Error reading file: " + e.getMessage());
@@ -103,9 +115,14 @@ public class PlayerManager {
             // Linia 8-9: Versus wins/losses
             fileWriter.println(player.getVersusWins());
             fileWriter.println(player.getVersusLosses());
+
             // Linia 10-11: Multiplayer wins/losses
             fileWriter.println(player.getMultiWins());
             fileWriter.println(player.getMultiLosses());
+
+            // Linia 12-13: isLeader, isChampion
+            fileWriter.println(player.getIsLeader());
+            fileWriter.println(player.getIsChampion());
 
             fileWriter.close();
             // niech zostanie do debugowania

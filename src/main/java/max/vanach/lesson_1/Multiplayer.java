@@ -69,12 +69,24 @@ public class Multiplayer {
     }
 
     public void play(Scanner scan, ArrayList<Player> players) {
+        System.out.println("\n=== Players in this round ===");
+        for (Player p : players) {               
+            System.out.println("- " + p.getNickname() + 
+            (p.getIsLeader() ? " [LIDER]" : "") + 
+            (p.getIsChampion() ? " [MISTRZ]" : ""));
+        }
+        System.out.println("=============================\n");
+
+
         int currentPlayer = 0;
 
         boolean hasWon = false;
         while (!hasWon) {
             Player player = players.get(currentPlayer);
-            System.out.print(player.getNickname() + " your guess is: ");
+            System.out.print(player.getNickname() + 
+            (player.getIsLeader() ? " [LIDER]" : "") + 
+            (player.getIsChampion() ? " [MISTRZ]" : "") +
+            " your guess is: ");
             int guess = Integer.parseInt(scan.nextLine());
             hasWon = makeGuess(guess);
 

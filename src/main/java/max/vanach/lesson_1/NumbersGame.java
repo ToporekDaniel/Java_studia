@@ -16,6 +16,13 @@ public class NumbersGame {
         // Wczytaj lub stwórz gracza przez PlayerManager
         Player player = PlayerManager.loadPlayer(name);
 
+//// === TESTOWE - USUŃ POTEM ===
+// player.setIsLeader(true);
+// player.setIsChampion(true);
+// PlayerManager.savePlayer(player);
+// System.out.println("DEBUG: Zapisano gracza z tytułami!");
+//// === KONIEC TESTOWYCH ===test
+
         // Wczytaj lub stwórz komputer
         Player computer = PlayerManager.loadPlayer("_COMPUTER");
 
