@@ -11,6 +11,8 @@ public class Player {
     private int versusLosses;
     private int multiWins;
     private int multiLosses;
+    private boolean isLeader;
+    private boolean isChampion;
 
     public Player(String nickname) {
         this.nickname = nickname;
@@ -20,6 +22,8 @@ public class Player {
         this.versusLosses = 0;
         this.multiWins = 0;
         this.multiLosses = 0;
+        this.isLeader = false;
+        this.isChampion = false;
     }
 
     // level: 1, 2, 3 -> index: 0, 1, 2
@@ -56,6 +60,12 @@ public class Player {
     }
 
     public void printScores() {
+
+        System.out.print("=== " + getNickname());
+        if (getIsChampion() && getIsLeader()) System.out.print(" [MISTRZ LIDER]");
+        else if (getIsLeader()) System.out.print(" [LIDER]");
+        else if (getIsChampion()) System.out.print(" [MISTRZ]");
+        System.out.println(" ===");
 
         // Single scores
         System.out.print("Single best scores - ");
@@ -118,6 +128,22 @@ public class Player {
         return this.multiLosses;
     }
 
+    public boolean getIsLeader() {
+        return this.isLeader;
+    }
+
+    public boolean getIsChampion() {
+        return this.isChampion;
+    }
+
+    public int getMultiWinRatio() {
+        if (getMultiWins() + getMultiLosses() == 0) {
+            return 0;
+        }
+        // najpierw mnożymy, żeby uniknąć problemów z dzieleniem całkowitym integer division czy coś takiego
+        return getMultiWins()*100 / (getMultiWins() + getMultiLosses());
+    }
+
     public String getNickname() {
         return this.nickname;
     }
@@ -145,6 +171,14 @@ public class Player {
 
     public void setMultiLosses(int losses) {
         this.multiLosses = losses;
+    }
+
+    public void setIsLeader(boolean isLeader) {
+        this.isLeader = isLeader;
+    }
+
+    public void setIsChampion(boolean isChampion) {
+        this.isChampion = isChampion;
     }
 
 }
